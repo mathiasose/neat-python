@@ -2,7 +2,7 @@ import os
 import unittest
 
 import neat
-from neat.indexer import Indexer
+from neat.indexer import Indexer, UUIDIndexer
 
 
 class PopulationTests(unittest.TestCase):
@@ -129,12 +129,29 @@ def test_indexer():
     assert indexer0.get_next() == 1
     assert indexer0.get_next() == 2
 
-
     indexer17 = Indexer(17)
     assert indexer17.get_next() == 17
     assert indexer17.get_next() == 18
     assert indexer17.get_next() == 19
 
 
+def test_uuid_indexer():
+    """
+    Assert that the UUID indexer does not produce colliding indices.
+
+    > The number of random version 4 UUIDs which need to be generated
+    > in order to have a 50% probability of at least one collision is 2.71 quintillion.
+    -- https://en.wikipedia.org/wiki/Universally_unique_identifier#Collisions
+    """
+    indexer = UUIDIndexer()
+
+
+    N = 1000
+    indices = set(indexer.get_next() for _ in range(N))
+
+    assert len(indices) == N
+
+
 if __name__ == '__main__':
     test_indexer()
+    test_uuid_indexer()

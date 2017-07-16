@@ -1,3 +1,6 @@
+from uuid import uuid4
+
+
 class Indexer(object):
     def __init__(self, first):
         self.next_id = first
@@ -10,4 +13,19 @@ class Indexer(object):
         if result is None:
             result = self.next_id
             self.next_id += 1
+        return result
+
+
+class UUIDIndexer(Indexer):
+    """
+    Uses random universally unique identifiers as indices.
+     With a size of 128 bits per index, collisions are impossible for all practical purposes.
+    """
+
+    def __init__(self, first=None):
+        super().__init__(first=first)
+
+    def get_next(self, result=None):
+        if result is None:
+            result = uuid4().int
         return result
