@@ -3,7 +3,7 @@ from __future__ import division
 import math
 import random
 
-from neat.indexer import Indexer
+from neat.indexer import SequentialIndexer
 from neat.math_util import mean
 from neat.six_util import iteritems, itervalues
 
@@ -42,7 +42,7 @@ class DefaultReproduction(object):
         self.survival_threshold = float(config.get('survival_threshold'))
 
         self.reporters = reporters
-        self.genome_indexer = Indexer(1)
+        self.genome_indexer = SequentialIndexer(1)
         self.stagnation = stagnation
         self.ancestors = {}
 

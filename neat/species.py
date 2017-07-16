@@ -1,4 +1,4 @@
-from neat.indexer import Indexer
+from neat.indexer import SequentialIndexer
 from neat.math_util import mean, stdev
 from neat.six_util import iteritems, iterkeys, itervalues
 
@@ -50,7 +50,7 @@ class DefaultSpeciesSet(object):
 
     def __init__(self, config, reporters):
         self.reporters = reporters
-        self.indexer = Indexer(1)
+        self.indexer = SequentialIndexer(1)
         self.species = {}
         self.genome_to_species = {}
 

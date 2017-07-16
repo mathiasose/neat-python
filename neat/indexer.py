@@ -1,7 +1,7 @@
 from uuid import uuid4
 
 
-class Indexer(object):
+class SequentialIndexer(object):
     def __init__(self, first):
         self.next_id = first
 
@@ -16,7 +16,7 @@ class Indexer(object):
         return result
 
 
-class UUIDIndexer(Indexer):
+class UUIDIndexer(SequentialIndexer):
     """
     Uses random universally unique identifiers as indices.
      With a size of 128 bits per index, collisions are impossible for all practical purposes.

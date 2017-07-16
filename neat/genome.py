@@ -8,7 +8,7 @@ from neat.activations import ActivationFunctionSet
 from neat.config import ConfigParameter, write_pretty_params
 from neat.genes import DefaultConnectionGene, DefaultNodeGene
 from neat.graphs import creates_cycle
-from neat.indexer import Indexer
+from neat.indexer import SequentialIndexer
 from neat.six_util import iteritems, iterkeys
 
 
@@ -83,7 +83,7 @@ class DefaultGenomeConfig(object):
 
     def get_new_node_key(self, node_dict):
         if not hasattr(self, 'node_indexer'):
-            self.node_indexer = Indexer(max(list(iterkeys(node_dict)))+1)
+            self.node_indexer = SequentialIndexer(max(list(iterkeys(node_dict))) + 1)
 
         new_id = self.node_indexer.get_next()
 
